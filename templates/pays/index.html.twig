@@ -1,0 +1,77 @@
+{% extends 'index.html.twig' %}
+
+{% block title %}Hello PaysController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="content">
+			
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-md-12" style="text-align:center;">
+						<div class="card">
+							<div class="card-header">
+								<h2>Ajouter un pays</h2>
+							</div>
+							<div class="card-body">
+								<form action="{{path('insertPays')}}" method="post">
+									<div class="form-group">
+										<label class="control-label">Nom du pays</label>
+										<input class="form-control" type="text" name="nomPays" placeholder="saisir un nom de pays">
+									</div>	
+														
+									<div class="form-group">
+										<input class="btn btn-success" type="submit" name="ajout" value="AJOUTER">
+										<input class="btn btn-danger" type="reset" name="annuler" value="ANNULER">
+									</div>
+								</form>
+							</div>
+							<div class="card-footer">
+							</div>
+						
+						</div>
+					</div>
+				</div>
+			</div>
+
+            <div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h2>LISTE DES PAYS</h2>
+							</div>
+							<div class="card-body">
+									<table class="table table-striped table-bordered">
+										<tr>
+											<th>ID</th>
+											<th>Nom</th>
+											<th>ACTION</th>
+											<th>ACTION</th>
+											<th>ACTION</th>										
+										</tr>
+										{% for var in listePays %}
+											<tr>
+                                                <td>{{var.id}}</td>
+												<td>{{var.nom}}</td>
+												
+												<td>Editer</td>
+												<td><a href="{{path('deletePays' ,{'id':var.id})}}">Supprimer</a></td>
+												<td>Visualiser</td>
+											</tr>
+										{% endfor %}
+									</table>
+								
+							</div>
+							<div class="card-footer">
+							
+							</div>
+						
+						</div>
+						
+					</div>
+			</div>
+		</div>
+{% endblock %}
