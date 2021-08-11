@@ -5,6 +5,7 @@
     use Symfony\Component\HttpFoundation\Response;
     use Symfony\Component\Routing\Annotation\Route;
     use App\Entity\Zone;
+    use App\Entity\Pays;
     
     class ZoneController extends AbstractController
     {
@@ -14,16 +15,18 @@
         {
             $entityManager = $this->getDoctrine()->getManager();
             $data ["listeZone"] = $entityManager->getRepository(Zone::class)->findAll();
-
+            $data ["listePays"] = $entityManager->getRepository(Pays::class)->findAll();
             return $this->render('zone/index.html.twig', $data);
         }
 
-        #[Route('/zone/ajoutPays', name :"insertZone")]
+        #[Route('/zone/ajoutZone', name :"insertZone")]
         public function addZone(): Response
         {
             $entityManager = $this->getDoctrine()->getManager();
             $zone = new Zone();
             $zone->setNom($_POST["nomZone"]);
+            $pays = $entityManager->getRepository(Pays::class)->find($_POST["selectPays"]);
+            $pays->setPays($pays);
             $entityManager->persist($zone);
             $entityManager->flush();
             return $this->redirectToRoute("acceszone");
