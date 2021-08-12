@@ -10,13 +10,11 @@ use App\Entity\Zone;
 
 class PointSurveillanceController extends AbstractController
 {
-    /*
-        *@Route("/point_surveillance",name="point_surveillance")
-    **/
-    #[Route('/point_surveillance', name :"point_surveillance")]
+    
+    #[Route('/point_surveillance', name :"accespoint")]
     public function index(): Response
     {
-        $entityManager = $this->getDoctrine()->getManager();
+            $entityManager = $this->getDoctrine()->getManager();
             $data ["listeDesPoints"] = $entityManager->getRepository(PointSurveillance::class)->findAll();
             $data ["listeZone"] = $entityManager->getRepository(Zone::class)->findAll();
             return $this->render('point_surveillance/index.html.twig', $data);
@@ -37,5 +35,14 @@ class PointSurveillanceController extends AbstractController
         return $this->redirectToRoute("accespoint");
     }
 
-    
+        /*
+        *@Route("/PointSurveillance/nouveau",name="createpoint")
+        **/
+        public function create()
+        {
+            $point = new PointSurveillance();
+            $entityManager = $this->getDoctrine()->getManager();
+
+            return $this->redirectToRoute("accespoint");
+        }
 }
