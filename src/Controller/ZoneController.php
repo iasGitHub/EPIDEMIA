@@ -26,7 +26,7 @@
             $zone = new Zone();
             $zone->setNom($_POST["nomZone"]);
             $pays = $entityManager->getRepository(Pays::class)->find($_POST["selectPays"]);
-            $pays->setPays($pays);
+            $zone->setPays($pays);
             $entityManager->persist($zone);
             $entityManager->flush();
             return $this->redirectToRoute("acceszone");

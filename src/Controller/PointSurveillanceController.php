@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\PointSurveillance;
+use App\Entity\Zone;
 
 class PointSurveillanceController extends AbstractController
 {
@@ -17,7 +18,7 @@ class PointSurveillanceController extends AbstractController
     {
         $entityManager = $this->getDoctrine()->getManager();
             $data ["listeDesPoints"] = $entityManager->getRepository(PointSurveillance::class)->findAll();
-
+            $data ["listeZone"] = $entityManager->getRepository(Zone::class)->findAll();
             return $this->render('point_surveillance/index.html.twig', $data);
     }
 
@@ -29,6 +30,8 @@ class PointSurveillanceController extends AbstractController
         $point->setCode($_POST["codePt"]);
         $point->setCoordonnees($_POST["coord"]);
         $point->setZones($_POST["zones"]);
+        $zone = $entityManager->getRepository(Zone::class)->find($_POST["selectZone"]);
+        $point->setZones($zone);
         $entityManager->persist($point);
         $entityManager->flush();
         return $this->redirectToRoute("accespoint");
