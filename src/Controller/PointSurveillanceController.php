@@ -11,7 +11,7 @@ use App\Entity\Zone;
 class PointSurveillanceController extends AbstractController
 {
     
-    #[Route('/point_surveillance', name :"accespoint")]
+    #[Route('/point_surveillance', name :"point_surveillance")]
     public function index(): Response
     {
             $entityManager = $this->getDoctrine()->getManager();
@@ -32,7 +32,7 @@ class PointSurveillanceController extends AbstractController
         $point->setZones($zone);
         $entityManager->persist($point);
         $entityManager->flush();
-        return $this->redirectToRoute("accespoint");
+        return $this->redirectToRoute("point_surveillance");
     }
 
         /*
@@ -43,6 +43,6 @@ class PointSurveillanceController extends AbstractController
             $point = new PointSurveillance();
             $entityManager = $this->getDoctrine()->getManager();
 
-            return $this->redirectToRoute("accespoint");
+            return $this->redirectToRoute("point_surveillance");
         }
 }

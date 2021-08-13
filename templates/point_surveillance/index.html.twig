@@ -49,7 +49,44 @@
 					</div>
 				</div>
 			</div>
-
+			<div class="col-md-12">
+						<div class="card">
+							<div class="card-header">
+								<h2>Liste des points de surveillance</h2>
+							</div>
+							<div class="card-body">
+									<table class="table table-striped table-bordered">
+										<tr>
+											<th>ID</th>
+											<th>Code</th>
+											<th>Coordonnées</th>
+											<th>Zone</th>
+											<th>ACTION</th>
+											<th>ACTION</th>
+											<th>ACTION</th>										
+										</tr>
+										{% for var in listeDesPoints %}
+											<tr>
+                                                <td>{{var.id}}</td>
+												<td>{{var.code}}</td>
+												<td>{{var.coordonnees}}</td>
+												<td>{{var.zones}}</td>
+												<td>Editer</td>
+												<td><a href="{{path('deleteZone' ,{'id':var.id})}}">Supprimer</a></td>
+												<td>Visualiser</td>
+											</tr>
+										{% endfor %}
+									</table>
+								
+							</div>
+							<div class="card-footer">
+							
+							</div>
+						
+						</div>
+						
+					</div>
+			</div>
             	
 </div>
 {% endblock %}
